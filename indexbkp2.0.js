@@ -6,31 +6,6 @@ recognition.continuous = true;
 
 recognition.start();
 
-// Resolvemos o problema de não poder iniciar a captura de voz automaticamente
-let h1 = document.querySelector('h1');
-h1.click();
-
-const GetKey = (service, callback) => {
-    fetch('key.json')
-        .then(response => response.json())
-        .then(data => {
-            callback(data[service]);
-        })
-        .catch(error => console.error(error));
-};
-
-let openAIKey;
-let MicrosoftKey;
-
-GetKey('openai', (key) => {
-    openAIKey = key;
-    openAIKey = openAIKey.replaceAll("@", " ");
-});
-
-GetKey('microsoft', (key) => {
-    MicrosoftKey = key;
-});
-
 document.addEventListener('DOMContentLoaded', function () {
     const toggleButton = document.getElementById('toggle-mode');    
     toggleButton.addEventListener('click', function () {
@@ -46,25 +21,27 @@ const TrocarTema = () => {
     body.classList.toggle('dark-mode');    
 
     const toggleButton = document.getElementById('toggle-mode');
-    toggleButton.innerHTML = isDarkMode ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    toggleButton.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
 }
 
 // Criamos o método para consultar a API do OpenAI
-const ConsultarOpenAI = (pergunta) => {
+const ConsultarOpenAI = async (pergunta) => {
+
+    let chave_api = 'SUA_CHAVE_API';
 
     // Aqui vamos configurar o cabeçalho da requisição
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer "+openAIKey);
+    myHeaders.append("Authorization", "Bearer "+chave_api);
     myHeaders.append("Cookie", "__cf_bm=v0AdReGOtspMRNHPTxBnwh4YpzHbRR3WFc5yw.Kbog0-1701178883-0-AUrAM7cQPblZhbmGBJYiRxgDAo+gYsy84++07t88g4mU3GzzmZoydnJUoPQY977YN/crgICgRVcITFTr1dYuDAs=; _cfuvid=mfC4AWHdBgbcC1SKc7l12a8t8N7UqskkQAFbDwn2o5E-1701178883225-0-604800000");
 
     // Aqui vamos configurar o corpo da requisição
     var raw = JSON.stringify({
-    "model": "ft:gpt-3.5-turbo-0613:personal::8PrYpqin",
+    "model": "ft:gpt-3.5-turbo-0613:zeros-e-um::8PrTlJrT",
     "messages": [
         {
         "role": "system",
-        "content": "Banana é um chatbot amigavel que fala girias"
+        "content": "Jarvis é um chatbot pontual e muito simpático que ajuda as pessoas"
         },
         {
         "role": "user",
@@ -102,7 +79,7 @@ const CapturarVoz = () => {
         
         const result = event.results[event.results.length - 1][0].transcript;         
 
-        if (result.toLowerCase().includes('banana')) { 
+        if (result.toLowerCase().includes('jarvis')) { 
 
             TrocarCor('#4CAF50');
 
@@ -117,7 +94,7 @@ const CapturarVoz = () => {
             } 
 
             // Comece a salvar a pergunta quando "Jarvis" é detectado
-            let array_pergunta = result.toLowerCase().split(/(banana)/);
+            let array_pergunta = result.toLowerCase().split(/(jarvis)/);
 
             // Remova o que vem antes de "Jarvis"
             array_pergunta.shift();
@@ -155,7 +132,7 @@ const CapturarVoz = () => {
 const ReproduzirVoz = (resposta) => {
 
     var myHeaders = new Headers();
-    myHeaders.append("Ocp-Apim-Subscription-Key", MicrosoftKey);
+    myHeaders.append("Ocp-Apim-Subscription-Key", "d98f2a2fdcae4060819904e630e814d6");
     myHeaders.append("Content-Type", "application/ssml+xml");
     myHeaders.append("X-Microsoft-OutputFormat", "audio-16khz-128kbitrate-mono-mp3");
     myHeaders.append("User-Agent", "curl");
@@ -189,8 +166,6 @@ const ReproduzirVoz = (resposta) => {
     });
 
 }
-
-
 
 
 CapturarVoz();

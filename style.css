@@ -1,25 +1,27 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 *{
     margin: 0;
     padding: 0;
-    box-sizing: 0;
+    box-sizing: border-box;
 }
 
 body{
-    font-family: 'inter', sans-serif;
-    transition: background-color 0.5s ease;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.5s;
 }
+
 main{
     display: flex;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
 }
+
 .sidebar{
     width: 60px;
     background-color: #dd203c;
 }
+
 .chat{
     width: 100vw;
     height: 100vh;
@@ -28,52 +30,50 @@ main{
     align-items: center;
     justify-content: center;
 }
+
 h1{
     font-size: 96px;
     font-weight: bold;
     margin: 40px 0;
 }
+
 .pergunta{
     display: flex;
     margin: 15vh 0;
 }
+
 input{
     width: 800px;
-    border: none;
-    border-bottom: solid 2px #272727;
-    border-radius: 10px;
-    outline: none;
     font-size: 24px;
+    border: none;
+    border-bottom: solid 1px #272727;
+    outline: none;
     padding: 10px 0;
-    transition: background-color 0.5s ease;
-    
+    transition: background-color 0.5s;
 }
+
 button{
-    background-color: #9b9b9b;
+    background-color: #dd203c;
     padding: 20px 25px;
     border-radius: 50%;
     border: none;
     color: white;
     cursor: pointer;
-    font-size: 24px;
 }
 
-body.darkmode {
-    background-color: #333;
-    color: #fff;
+body.dark-mode {
+    background-color: #272727;
+    color: #ffffff;
 }
-body.darkmode input{
-    background-color: #333;
-    color:#fff
-    
+
+body.dark-mode input{
+    background-color: #272727;
+    color: #ffffff;
+    border-bottom: solid 1px #ffffff;
 }
-.brightness {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-}
-button.brightness {
-    background-color: #fff;
-    color: #333;
+
+#toggle-mode{
+    width: 60px;
+    height: 60px;
+    margin: 20px;
 }
