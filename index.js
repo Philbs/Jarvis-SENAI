@@ -25,7 +25,6 @@ let MicrosoftKey;
 GetKey('openai', (key) => {
     openAIKey = key;
     openAIKey = openAIKey.replaceAll("@", "");
-    console.log(openAIKey);
 });
 
 GetKey('microsoft', (key) => {
@@ -65,7 +64,7 @@ const ConsultarOpenAI = (pergunta) => {
     "messages": [
         {
         "role": "system",
-        "content": "Banana é um chatbot amigavel que fala girias"
+        "content": "Banana é um chatbot chatbot simpatico, amigavel e que fala girias"
         },
         {
         "role": "user",
